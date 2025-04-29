@@ -86,8 +86,8 @@ const VehiclePriceModal = ({ isVisible, onClose }) => {
               : "opacity-0 translate-y-10"
           }`}
         >
-          <div className="rounded-xl shadow-lg bg-white overflow-hidden">
-            <div className="relative mb-6 mx-auto pt-4">
+          <div className="w-full max-w-lg rounded-xl shadow-lg bg-white overflow-hidden">
+            <div className="relative mb-6 px-4 mx-auto pt-4">
               <div className="absolute inset-x-0 top-0 h-12 bg-blue-600 rounded-t-xl" />
               <button
                 onClick={handleClose}
