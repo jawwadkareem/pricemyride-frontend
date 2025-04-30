@@ -39,7 +39,7 @@ const PriceMyRide = () => {
       </div> */}
 
      {/* Calculator Box */}
-<div className="absolute bottom-6 right-6 group w-[60px] sm:w-[90px] md:w-[110px] h-[80px] sm:h-[110px] md:h-[130px] bg-[#277ec5] hover:bg-blue-300 rounded-2xl flex items-center justify-center cursor-pointer transition-all duration-300">
+<div className="absolute bottom-6 right-6 group w-[60px] sm:w-[70px] md:w-[110px] h-[80px] sm:h-[90px] md:h-[130px] bg-[#277ec5] hover:bg-blue-300 rounded-2xl flex items-center justify-center cursor-pointer transition-all duration-300">
   {/* Text Box that will only show on hover */}
   <div
     onClick={() => setIsModalVisible(true)}
@@ -53,7 +53,7 @@ const PriceMyRide = () => {
     src="./calculator-icon.png"
     alt="Calculator Icon"
     onClick={() => setIsModalVisible(true)}
-    className="w-[40px] sm:w-[50px] md:w-[80px] h-[60px] sm:h-[80px] md:h-[110px] transition-all duration-300"
+    className="w-[40px] sm:w-[30px] md:w-[80px] h-[60px] sm:h-[60px] md:h-[110px] transition-all duration-300"
   />
 </div>
 
