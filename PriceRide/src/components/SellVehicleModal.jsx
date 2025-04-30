@@ -68,16 +68,17 @@ const SellVehicleModal = ({ isVisible, onClose, vehicleData }) => {
     }
   };
 
-  return (
+ return (
     <Modal
       open={isVisible}
       onCancel={handleClose}
       footer={null}
       centered
       maskClosable
-      width={420}
+      width="100%"
+      style={{ maxWidth: 350, margin: "0 auto" }}
       bodyStyle={{
-        padding: "30px",
+        padding: "1.5rem",
         borderRadius: "12px",
         backgroundColor: "#fff",
       }}
