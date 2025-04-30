@@ -69,19 +69,19 @@ const SellVehicleModal = ({ isVisible, onClose, vehicleData }) => {
   };
 
   return (
-    <Modal
-      open={isVisible}
-      onCancel={handleClose}
-      footer={null}
-      centered
-      maskClosable
-      width="100%"
-      style={{ maxWidth: 350, margin: "0 auto" }}
-      bodyStyle={{
-        padding: "1.5rem",
-        borderRadius: "12px",
-        backgroundColor: "#fff",
-      }}
+  <Modal
+    open={isVisible}
+    onCancel={handleClose}
+    footer={null}
+    centered
+    maskClosable
+    width="100%"
+    style={{ maxWidth: 350, margin: "0 auto", padding: "0 1rem" }}
+    bodyStyle={{
+      padding: "1.25rem",
+      borderRadius: "12px",
+      backgroundColor: "#fff",
+    }}
     >
       <h2 className="text-xl font-bold text-center mb-6">Enter Your Details</h2>
 
