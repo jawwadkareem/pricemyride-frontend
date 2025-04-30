@@ -86,60 +86,62 @@ const VehiclePriceModal = ({ isVisible, onClose }) => {
               : "opacity-0 translate-y-10"
           }`}
         >
-          <div className="w-full max-w-lg rounded-xl shadow-lg bg-white overflow-hidden">
-            <div className="relative mb-6 px-4 mx-auto pt-4">
-              <div className="absolute inset-x-0 top-0 h-12 bg-blue-600 rounded-t-xl" />
-              <button
-                onClick={handleClose}
-                className="absolute top-2 right-3 text-white text-xl font-bold z-20"
-              >
-                &times;
-              </button>
-              <h2 className="relative text-2xl font-bold text-white text-center z-10">
-                Enter Vehicle Details
-              </h2>
-            </div>
+         <div className="fixed bottom-4 right-4 w-[80%] sm:w-full sm:max-w-lg sm:bottom-0 sm:right-2 z-50">
+            <div className="rounded-xl shadow-lg bg-white overflow-hidden">
+              <div className="relative mb-6 px-4 pt-4">
+                <div className="absolute inset-x-0 top-0 h-12 bg-blue-600 rounded-t-xl" />
+                <button
+                  onClick={handleClose}
+                  className="absolute top-2 right-3 text-white text-xl font-bold z-20"
+                >
+                  &times;
+                </button>
+                <h2 className="relative text-2xl font-bold text-white text-center z-10">
+                  Enter Vehicle Details
+                </h2>
+              </div>
 
-            <div className="flex flex-col gap-4 px-6 pb-6">
-              <input
-                className="border border-gray-300 rounded px-4 py-2 text-sm shadow-md focus:ring-2 focus:ring-blue-600"
-                placeholder="Build Year"
-                value={buildYear}
-                onChange={(e) => setBuildYear(e.target.value)}
-              />
-              <input
-                className="border border-gray-300 rounded px-4 py-2 text-sm shadow-md focus:ring-2 focus:ring-blue-600"
-                placeholder="Make"
-                value={make}
-                onChange={(e) => setMake(e.target.value)}
-              />
-              <input
-                className="border border-gray-300 rounded px-4 py-2 text-sm shadow-md focus:ring-2 focus:ring-blue-600"
-                placeholder="Model"
-                value={model}
-                onChange={(e) => setModel(e.target.value)}
-              />
-              <input
-                className="border border-gray-300 rounded px-4 py-2 text-sm shadow-md focus:ring-2 focus:ring-blue-600"
-                placeholder="Odometer (in KM)"
-                value={odometer}
-                onChange={(e) => setOdometer(e.target.value)}
-              />
-              <input
-                className="border border-gray-300 rounded px-4 py-2 text-sm shadow-md focus:ring-2 focus:ring-blue-600"
-                placeholder="Specification (optional)"
-                value={specification}
-                onChange={(e) => setSpecification(e.target.value)}
-              />
-              <button
-                onClick={handleSubmit}
-                disabled={loading}
-                className={`bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm mt-2 ${
-                  loading ? "opacity-50 cursor-not-allowed" : ""
-                }`}
-              >
-                {loading ? "fetching..." : "Get Price"}
-              </button>
+              <div className="flex flex-col gap-4 px-4 pb-6">
+                <input
+                  className="border border-gray-300 rounded px-4 py-2 text-sm shadow-md focus:ring-2 focus:ring-blue-600"
+                  placeholder="Build Year"
+                  value={buildYear}
+                  onChange={(e) => setBuildYear(e.target.value)}
+                />
+                <input
+                  className="border border-gray-300 rounded px-4 py-2 text-sm shadow-md focus:ring-2 focus:ring-blue-600"
+                  placeholder="Make"
+                  value={make}
+                  onChange={(e) => setMake(e.target.value)}
+                />
+                <input
+                  className="border border-gray-300 rounded px-4 py-2 text-sm shadow-md focus:ring-2 focus:ring-blue-600"
+                  placeholder="Model"
+                  value={model}
+                  onChange={(e) => setModel(e.target.value)}
+                />
+                <input
+                  className="border border-gray-300 rounded px-4 py-2 text-sm shadow-md focus:ring-2 focus:ring-blue-600"
+                  placeholder="Odometer (in KM)"
+                  value={odometer}
+                  onChange={(e) => setOdometer(e.target.value)}
+                />
+                <input
+                  className="border border-gray-300 rounded px-4 py-2 text-sm shadow-md focus:ring-2 focus:ring-blue-600"
+                  placeholder="Specification (optional)"
+                  value={specification}
+                  onChange={(e) => setSpecification(e.target.value)}
+                />
+                <button
+                  onClick={handleSubmit}
+                  disabled={loading}
+                  className={`bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm mt-2 ${
+                    loading ? "opacity-50 cursor-not-allowed" : ""
+                  }`}
+                >
+                  {loading ? "Fetching..." : "Get Price"}
+                </button>
+              </div>
             </div>
           </div>
         </div>
