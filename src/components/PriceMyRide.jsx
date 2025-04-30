@@ -39,11 +39,11 @@ const PriceMyRide = () => {
       </div> */}
 
     {/* Calculator Box */}
-<div className="absolute bottom-5 right-3 group cursor-pointer transition-all duration-300">
+<div className="absolute bottom-5 right-2 group cursor-pointer transition-all duration-300">
   {/* Hover Text */}
   <div
     onClick={() => setIsModalVisible(true)}
-    className="absolute bottom-28 sm:bottom-32 right-2 sm:right-4 bg-[#3da4fb] text-white text-[10px] sm:text-sm md:text-base w-[8rem] sm:w-[12rem] md:w-[14rem] px-2 py-2 text-center rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg"
+    className="absolute bottom-24 sm:bottom-32 right-2 sm:right-4 bg-[#3da4fb] text-white text-[10px] sm:text-sm md:text-base w-[8rem] sm:w-[12rem] md:w-[14rem] px-2 py-2 text-center rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg"
   >
     Calculator Price
   </div>
@@ -58,7 +58,7 @@ const PriceMyRide = () => {
 </div>
 
 {/* Modal */}
-<div className="absolute bottom-40">
+<div className="absolute bottom-38">
   <VehiclePriceModal
     isVisible={isModalVisible}
     onClose={() => setIsModalVisible(false)}
