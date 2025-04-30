@@ -53,7 +53,7 @@ const PriceMyRide = () => {
     src="./calculator-icon.png"
     alt="Calculator Icon"
     onClick={() => setIsModalVisible(true)}
-    className="w-[40px] sm:w-[60px] md:w-[80px] h-[70px] sm:h-[90px] md:h-[110px] border-4 border-[#277ec5] rounded-2xl transition-all duration-300"
+    className="w-[47px] sm:w-[57px] md:w-[82px] h-[70px] sm:h-[90px] md:h-[110px] border-4 border-[#277ec5] rounded-2xl transition-all duration-300"
   />
 </div>
 
