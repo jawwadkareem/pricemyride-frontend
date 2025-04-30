@@ -81,6 +81,9 @@ const VehiclePriceResultModal = ({ isVisible, onClose, vehicleDetails }) => {
               : "opacity-0 translate-y-10"
           }`}
         >
+           <div
+  className="fixed bottom-2 right-2 w-[80%] sm:w-full sm:max-w-md sm:bottom-2 sm:right-2 z-50"
+>
           <div className="rounded-xl shadow-lg bg-white overflow-hidden">
             <div className="bg-blue-600 rounded-t-xl px-4 py-3 relative">
               <h2 className="text-white font-semibold text-lg text-center">
@@ -137,6 +140,7 @@ const VehiclePriceResultModal = ({ isVisible, onClose, vehicleDetails }) => {
               >
                 Would you like to sell your vehicle now?
               </button>
+              </div>
             </div>
           </div>
         </div>
