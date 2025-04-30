@@ -94,7 +94,7 @@ const SellVehicleModal = ({ isVisible, onClose, vehicleData }) => {
           {message}
         </div>
       )}
-     <div className="fixed bottom-4 right-4 w-[90%] sm:w-full sm:max-w-md sm:bottom-8 sm:right-8 z-50"></div>
+     <div className="fixed bottom-2 right-4 w-[80%] sm:w-full sm:max-w-md sm:bottom-4 sm:right-2 z-50"></div>
       <div className="flex flex-col gap-4">
         <input
           type="text"
