@@ -75,9 +75,10 @@ const SellVehicleModal = ({ isVisible, onClose, vehicleData }) => {
       footer={null}
       centered
       maskClosable
-      width={420}
+      width="100%"
+      style={{ maxWidth: 350, margin: "0 auto" }}
       bodyStyle={{
-        padding: "30px",
+        padding: "1.5rem",
         borderRadius: "12px",
         backgroundColor: "#fff",
       }}
@@ -94,7 +95,7 @@ const SellVehicleModal = ({ isVisible, onClose, vehicleData }) => {
           {message}
         </div>
       )}
-     <div className="fixed bottom-2 right-4 w-[70%] sm:w-full sm:max-w-md sm:bottom-4 sm:right-2 z-50"></div>
+    
       <div className="flex flex-col gap-4">
         <input
           type="text"
