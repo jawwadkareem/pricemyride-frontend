@@ -39,24 +39,23 @@ const PriceMyRide = () => {
       </div> */}
 
      {/* Calculator Box */}
-<div className="absolute bottom-3 right-3 group w-[60px] sm:w-[50px] md:w-[110px] h-[60px] sm:h-[70px] md:h-[130px] bg-[#277ec5] hover:bg-blue-300 rounded-2xl flex items-center justify-center cursor-pointer transition-all duration-300">
-  {/* Text Box that will only show on hover */}
+<div className="absolute bottom-6 right-6 group cursor-pointer transition-all duration-300">
+  {/* Hover Text */}
   <div
     onClick={() => setIsModalVisible(true)}
-    className="absolute bottom-28 sm:bottom-32 right-8 sm:right-14 bg-[#3da4fb] text-white text-[10px] sm:text-sm md:text-base w-[8rem] sm:w-[12rem] md:w-[14rem] px-2 py-2 text-center rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg"
+    className="absolute bottom-28 sm:bottom-32 right-2 sm:right-4 bg-[#3da4fb] text-white text-[10px] sm:text-sm md:text-base w-[8rem] sm:w-[12rem] md:w-[14rem] px-2 py-2 text-center rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg"
   >
     Calculator Price
   </div>
 
-  {/* Calculator Image that opens modal on click */}
+  {/* Calculator Image with border */}
   <img
     src="./calculator-icon.png"
     alt="Calculator Icon"
     onClick={() => setIsModalVisible(true)}
-    className="w-[40px] sm:w-[30px] md:w-[80px] h-[60px] sm:h-[40px] md:h-[110px] transition-all duration-300"
+    className="w-[50px] sm:w-[70px] md:w-[80px] h-[70px] sm:h-[90px] md:h-[110px] border-4 border-[#277ec5] rounded-2xl transition-all duration-300"
   />
 </div>
-
 
 {/* Modal */}
 <div className="absolute bottom-40">
