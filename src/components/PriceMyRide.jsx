@@ -43,7 +43,7 @@ const PriceMyRide = () => {
   {/* Hover Text */}
   <div
     onClick={() => setIsModalVisible(true)}
-    className="absolute bottom-24 sm:bottom-32 right-2 sm:right-4 bg-[#3da4fb] text-white text-[10px] sm:text-sm md:text-base w-[8rem] sm:w-[12rem] md:w-[14rem] px-2 py-2 text-center rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg"
+    className="absolute bottom-24 sm:bottom-28 right-12 sm:right-4 bg-[#3da4fb] text-white text-[10px] sm:text-sm md:text-base w-[8rem] sm:w-[12rem] md:w-[14rem] px-2 py-2 text-center rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg"
   >
     Calculator Price
   </div>
