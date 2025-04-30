@@ -49,14 +49,14 @@ const PriceMyRide = () => {
   </div>
 
   {/* Calculator Image with consistent border */}
- <div className="absolute bottom-5 right-2">
+ 
   <img
     src="./calculator-icon.png"
     alt="Calculator Icon"
     onClick={() => setIsModalVisible(true)}
     className="w-[50px] h-[60px] sm:w-[58px] sm:h-[70px] md:w-[75px] md:h-[90px] border-4 border-[#277ec5] rounded-2xl object-cover box-border transition-all duration-300"
   />
-   </div>
+  
 </div>
 
 {/* Modal */}
