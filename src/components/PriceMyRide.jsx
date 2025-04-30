@@ -39,7 +39,7 @@ const PriceMyRide = () => {
       </div> */}
 
      {/* Calculator Box */}
-<div className="absolute bottom-5 right-5 group cursor-pointer transition-all duration-300">
+<div className="absolute bottom-5 right-3 group cursor-pointer transition-all duration-300">
   {/* Hover Text */}
   <div
     onClick={() => setIsModalVisible(true)}
