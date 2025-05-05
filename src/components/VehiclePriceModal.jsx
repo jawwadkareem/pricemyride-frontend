@@ -23,8 +23,10 @@ const VehiclePriceModal = ({ isVisible, onClose, setIsIconVisible }) => {
 
   const handleClose = () => {
     setIsVisibleWithAnimation(false);
-    setTimeout(onClose, 500);
-    // Do not setIsIconVisible(true) here to keep the icon hidden
+    setTimeout(() => {
+      onClose();
+      setIsIconVisible(true); // Show icon when closing directly
+    }, 500);
   };
 
   const handleSubmit = async () => {
