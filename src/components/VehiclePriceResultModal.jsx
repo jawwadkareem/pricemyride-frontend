@@ -3,7 +3,7 @@ import { CloseOutlined } from "@ant-design/icons";
 import SellVehicleModal from "./SellVehicleModal";
 import config from "../../config";
 
-const VehiclePriceResultModal = ({ isVisible, onClose, vehicleDetails }) => {
+const VehiclePriceResultModal = ({ isVisible, onClose, vehicleDetails, setIsIconVisible }) => {
   const [isSellModalVisible, setIsSellModalVisible] = useState(false);
   const [isVisibleWithAnimation, setIsVisibleWithAnimation] = useState(false);
   const [retailPrice, setRetailPrice] = useState("");
@@ -57,9 +57,7 @@ const VehiclePriceResultModal = ({ isVisible, onClose, vehicleDetails }) => {
 
   const handleClose = () => {
     setIsVisibleWithAnimation(false);
-    setTimeout(() => {
-      onClose();
-    }, 500);
+    setTimeout(onClose, 500);
   };
 
   const handleSellVehicleModalOpen = () => {
@@ -75,60 +73,130 @@ const VehiclePriceResultModal = ({ isVisible, onClose, vehicleDetails }) => {
     <>
       {isVisible && (
         <div
-          className={`fixed bottom-4 right-4 z-50 w-[360px] max-w-md transition-all duration-500 ease-out ${
-            isVisibleWithAnimation
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
-          }`}
+          style={{
+            position: "fixed",
+            bottom: "1rem",
+            right: "1rem",
+            zIndex: 50,
+            width: "90vw",
+            maxWidth: "320px",
+            transition: "all 500ms ease-out",
+            opacity: isVisibleWithAnimation ? 1 : 0,
+            transform: isVisibleWithAnimation ? "translateY(0)" : "translateY(2.5rem)",
+          }}
         >
-           <div
-  className="fixed bottom-2 right-2 w-[80%] sm:w-full sm:max-w-md sm:bottom-2 sm:right-2 z-50"
->
-          <div className="rounded-xl shadow-lg bg-white overflow-hidden">
-            <div className="bg-blue-600 rounded-t-xl px-4 py-3 relative">
-              <h2 className="text-white font-semibold text-lg text-center">
+          <div
+            style={{
+              borderRadius: "0.75rem",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              backgroundColor: "white",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              style={{
+                position: "relative",
+                backgroundColor: "#2563eb",
+                padding: "clamp(0.5rem, 2vw, 1rem)",
+                borderTopLeftRadius: "0.75rem",
+                borderTopRightRadius: "0.75rem",
+              }}
+            >
+              <h2
+                style={{
+                  fontSize: "clamp(1rem, 4vw, 1.25rem)",
+                  fontWeight: "bold",
+                  color: "white",
+                  textAlign: "center",
+                }}
+              >
                 Get Your Vehicle Price
               </h2>
               <CloseOutlined
                 onClick={handleClose}
-                className="text-white absolute top-3 right-4 text-lg cursor-pointer hover:text-gray-200"
+                style={{
+                  color: "white",
+                  position: "absolute",
+                  top: "0.75rem",
+                  right: "0.75rem",
+                  fontSize: "clamp(0.875rem, 3vw, 1.125rem)",
+                  cursor: "pointer",
+                }}
+                onMouseEnter={(e) => (e.target.style.color = "#e5e7eb")}
+                onMouseLeave={(e) => (e.target.style.color = "white")}
               />
             </div>
 
-            <div className="bg-white px-6 py-4 rounded-b-xl">
-              <p className="text-black font-semibold text-base mb-1">
+            <div
+              style={{
+                padding: "clamp(1rem, 3vw, 1.5rem) clamp(0.5rem, 2vw, 1rem)",
+                display: "flex",
+                flexDirection: "column",
+                gap: "clamp(0.5rem, 2vw, 0.75rem)",
+              }}
+            >
+              <p
+                style={{
+                  fontWeight: "600",
+                  fontSize: "clamp(0.875rem, 3.5vw, 1rem)",
+                  marginBottom: "clamp(0.25rem, 1vw, 0.25rem)",
+                }}
+              >
                 Price for your car
               </p>
-              <p className="text-sm mb-1">
+              <p style={{ fontSize: "clamp(0.75rem, 3vw, 0.875rem)" }}>
                 With Kilometer Driven: {vehicleDetails.odometer} Km
               </p>
-              <p className="text-sm mb-4">
+              <p style={{ fontSize: "clamp(0.75rem, 3vw, 0.875rem)" }}>
                 Including Specs: {vehicleDetails.specifications}
               </p>
 
               {errorMsg && (
-                <p className="text-red-600 text-sm font-semibold mb-2">
+                <p
+                  style={{
+                    color: "#dc2626",
+                    fontSize: "clamp(0.75rem, 3vw, 0.875rem)",
+                    fontWeight: "600",
+                    marginBottom: "clamp(0.25rem, 1vw, 0.5rem)",
+                  }}
+                >
                   {errorMsg}
                 </p>
               )}
 
-              <div className="mb-4">
-                <p className="font-bold mb-1">Wholesale Value</p>
+              <div style={{ marginBottom: "clamp(0.5rem, 2vw, 0.75rem)" }}>
+                <p style={{ fontWeight: "700", marginBottom: "clamp(0.25rem, 1vw, 0.25rem)", fontSize: "clamp(0.75rem, 3vw, 0.875rem)" }}>
+                  Wholesale Value
+                </p>
                 <input
                   type="text"
-                  className="w-full border rounded px-3 py-2 text-sm"
-                  placeholder="Fetching..."
+                  style={{
+                    width: "100%",
+                    border: "1px solid #d1d5db",
+                    borderRadius: "0.25rem",
+                    padding: "clamp(0.25rem, 1.5vw, 0.5rem) clamp(0.25rem, 1.5vw, 0.75rem)",
+                    fontSize: "clamp(0.75rem, 3vw, 0.875rem)",
+                    boxSizing: "border-box",
+                  }}
                   value={isLoading ? "Fetching..." : wholesalePrice}
                   readOnly
                 />
               </div>
 
-              <div className="mb-4">
-                <p className="font-bold mb-1">Retail Value</p>
+              <div style={{ marginBottom: "clamp(0.5rem, 2vw, 0.75rem)" }}>
+                <p style={{ fontWeight: "700", marginBottom: "clamp(0.25rem, 1vw, 0.25rem)", fontSize: "clamp(0.75rem, 3vw, 0.875rem)" }}>
+                  Retail Value
+                </p>
                 <input
                   type="text"
-                  className="w-full border rounded px-3 py-2 text-sm"
-                  placeholder="Fetching..."
+                  style={{
+                    width: "100%",
+                    border: "1px solid #d1d5db",
+                    borderRadius: "0.25rem",
+                    padding: "clamp(0.25rem, 1.5vw, 0.5rem) clamp(0.25rem, 1.5vw, 0.75rem)",
+                    fontSize: "clamp(0.75rem, 3vw, 0.875rem)",
+                    boxSizing: "border-box",
+                  }}
                   value={isLoading ? "Fetching..." : retailPrice}
                   readOnly
                 />
@@ -136,11 +204,23 @@ const VehiclePriceResultModal = ({ isVisible, onClose, vehicleDetails }) => {
 
               <button
                 onClick={handleSellVehicleModalOpen}
-                className="w-full bg-green-600 hover:bg-green-700 text-white text-sm py-2 rounded"
+                style={{
+                  backgroundColor: "#16a34a",
+                  color: "white",
+                  padding: "clamp(0.25rem, 1.5vw, 0.5rem)",
+                  borderRadius: "0.25rem",
+                  fontSize: "clamp(0.75rem, 3vw, 0.875rem)",
+                  border: "none",
+                  cursor: "pointer",
+                  transition: "background-color 150ms ease",
+                  width: "100%",
+                  boxSizing: "border-box",
+                }}
+                onMouseEnter={(e) => (e.target.style.backgroundColor = "#15803d")}
+                onMouseLeave={(e) => (e.target.style.backgroundColor = "#16a34a")}
               >
                 Would you like to sell your vehicle now?
               </button>
-              </div>
             </div>
           </div>
         </div>
@@ -149,7 +229,10 @@ const VehiclePriceResultModal = ({ isVisible, onClose, vehicleDetails }) => {
       {isSellModalVisible && (
         <SellVehicleModal
           isVisible={isSellModalVisible}
-          onClose={handleSellVehicleModalClose}
+          onClose={() => {
+            handleSellVehicleModalClose();
+            setIsIconVisible(true); // Show icon when SellVehicleModal closes
+          }}
         />
       )}
     </>

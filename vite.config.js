@@ -1,9 +1,26 @@
-import { defineConfig } from 'vite'
-import react from '@vitejs/plugin-react'
-import tailwindcss from '@tailwindcss/vite'
+// vite.config.js
+import { defineConfig } from 'vite';
+import react from '@vitejs/plugin-react';
 
-
-// https://vite.dev/config/
 export default defineConfig({
-  plugins: [react(),tailwindcss()],
-})
+  plugins: [react()],
+  build: {
+    lib: {
+      entry: 'src/widget/PriceMyRideWidget.jsx',
+      name: 'PriceChatWidget',
+      fileName: (format) => `price-chat-widget.${format}.js`,
+      formats: ['iife'],
+    },
+    rollupOptions: {
+      output: {
+        globals: {
+          react: 'React',
+          'react-dom': 'ReactDOM',
+        },
+      },
+    },
+  },
+  define: {
+    'process.env.NODE_ENV': JSON.stringify('production'),
+  },
+});

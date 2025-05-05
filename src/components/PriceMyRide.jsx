@@ -1,72 +1,103 @@
 import React, { useState } from "react";
 import VehiclePriceModal from "./VehiclePriceModal";
+import image from "../../public/calculator-icon.png";
 
 const PriceMyRide = () => {
   const [isModalVisible, setIsModalVisible] = useState(false);
+  const [isIconVisible, setIsIconVisible] = useState(true);
 
   return (
     <section
-      className="relative min-h-screen w-full bg-cover bg-center flex items-start justify-center pt-10"
-      // style={{
-      //   backgroundImage: "url('./background.png')",
-      // }}
+      style={{
+        position: "relative",
+        height: "100vh",
+        width: "100%",
+        backgroundColor: "#fff",
+        overflow: "hidden", // Prevent any scroll
+      }}
     >
-      {/* <div className="relative w-full max-w-[900px] px-4">
-        
-        <div className="absolute left-1/2 transform -translate-x-1/2 -top-34 z-10">
-          <img
-            src="./pricemyride.png"
-            alt="Price My Ride Logo"
-            className="w-[420px] md:w-[460px] lg:w-[480px]"
-          />
-        </div>
-
-        
-        <div className="pt-63 flex flex-col items-center gap-5 w-full">
-          {[
-            "INSTANT LIVE MARKETS APPRAISALS",
-            "NO MORE JUMPING THROUGH HOOPS",
-            "BONUS INSTANT CASH OFFER*",
-          ].map((text, index) => (
-            <div
-              key={index}
-              className="bg-[#3da4fb] text-[#c4ff00] text-center text-[18px] sm:text-[20px] md:text-[28px] lg:text-[35px] font-semibold uppercase px-6 py-6 rounded-xl w-full shadow-xl tracking-wide leading-snug break-words"
+      {isIconVisible && (
+        <div
+          style={{
+            position: "fixed",
+            bottom: "1rem",
+            right: "1rem",
+            cursor: "pointer",
+            zIndex: 1000,
+            transition: "opacity 0.3s ease",
+            opacity: isIconVisible ? 1 : 0,
+            pointerEvents: isIconVisible ? "auto" : "none",
+          }}
+        >
+          <div
+            style={{
+              position: "relative",
+              width: "75px",
+              height: "90px",
+              maxWidth: "10vw",
+              maxHeight: "12vh",
+              transition: "background-color 0.3s ease, border-color 0.3s ease",
+              border: "4px solid #2563eb",
+              borderRadius: "1rem",
+              backgroundColor: "transparent",
+            }}
+            onMouseEnter={(e) => {
+              e.currentTarget.style.backgroundColor = "#2563eb";
+              e.currentTarget.style.borderColor = "#2563eb";
+              e.currentTarget.children[0].style.opacity = "0";
+              e.currentTarget.children[1].style.opacity = "1";
+            }}
+            onMouseLeave={(e) => {
+              e.currentTarget.style.backgroundColor = "transparent";
+              e.currentTarget.style.borderColor = "#2563eb";
+              e.currentTarget.children[0].style.opacity = "1";
+              e.currentTarget.children[1].style.opacity = "0";
+            }}
+            onClick={() => {
+              setIsModalVisible(true);
+              setIsIconVisible(false);
+            }}
+          >
+            <img
+              src={image}
+              alt="Calculator Icon"
+              style={{
+                width: "100%",
+                height: "100%",
+                borderRadius: "0.75rem",
+                objectFit: "cover",
+                position: "absolute",
+                top: 0,
+                left: 0,
+                transition: "opacity 0.3s ease",
+              }}
+            />
+            <span
+              style={{
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                transform: "translate(-50%, -50%)",
+                color: "white",
+                fontSize: "clamp(0.6rem, 2.5vw, 0.75rem)",
+                fontWeight: "bold",
+                textAlign: "center",
+                opacity: 0,
+                transition: "opacity 0.3s ease",
+                whiteSpace: "nowrap",
+              }}
             >
-              {text}
-            </div>
-          ))}
+              Calculator Price
+            </span>
+          </div>
         </div>
-      </div> */}
+      )}
 
-    {/* Calculator Box */}
-<div className="absolute bottom-6 right-6 group cursor-pointer transition-all duration-300">
-  {/* Hover Text */}
-  <div
-    onClick={() => setIsModalVisible(true)}
-    className="absolute bottom-24 sm:bottom-28 right-2 sm:right-2 bg-[#3da4fb] text-white text-[10px] sm:text-sm md:text-base w-[8rem] sm:w-[12rem] md:w-[14rem] px-2 py-2 text-center rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 shadow-lg"
-  >
-    Calculator Price
-  </div>
-
-  {/* Calculator Image with consistent border */}
- 
-  <img
-    src="./calculator-icon.png"
-    alt="Calculator Icon"
-    onClick={() => setIsModalVisible(true)}
-    className="w-[50px] h-[60px] sm:w-[58px] sm:h-[70px] md:w-[75px] md:h-[90px] border-4 border-[#277ec5] rounded-2xl object-cover box-border transition-all duration-300"
-  />
-  
-</div>
-
-{/* Modal */}
-<div className="absolute bottom-40">
-  <VehiclePriceModal
-    isVisible={isModalVisible}
-    onClose={() => setIsModalVisible(false)}
-  />
-</div>
-
+      <VehiclePriceModal
+        isVisible={isModalVisible}
+        onClose={() => setIsModalVisible(false)}
+        setIsIconVisible={setIsIconVisible}
+      />
     </section>
   );
 };

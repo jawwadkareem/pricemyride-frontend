@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import VehiclePriceResultModal from "./VehiclePriceResultModal";
 import config from "../../config";
 
-const VehiclePriceModal = ({ isVisible, onClose }) => {
+const VehiclePriceModal = ({ isVisible, onClose, setIsIconVisible }) => {
   const [buildYear, setBuildYear] = useState("");
   const [make, setMake] = useState("");
   const [model, setModel] = useState("");
@@ -24,10 +24,10 @@ const VehiclePriceModal = ({ isVisible, onClose }) => {
   const handleClose = () => {
     setIsVisibleWithAnimation(false);
     setTimeout(onClose, 500);
+    // Do not setIsIconVisible(true) here to keep the icon hidden
   };
 
   const handleSubmit = async () => {
-    // Frontend validation
     if (!buildYear || !make || !model || !odometer) {
       alert(
         "Please fill all required fields: Build Year, Make, Model, Odometer."
@@ -62,7 +62,7 @@ const VehiclePriceModal = ({ isVisible, onClose }) => {
       const data = await res.json();
 
       if (res.ok) {
-        console.log(" Record added successfully:", data);
+        console.log("Record added successfully:", data);
         setShowResult(true);
       } else {
         alert(`Error: ${data.error || "Something went wrong!"}`);
@@ -80,68 +80,173 @@ const VehiclePriceModal = ({ isVisible, onClose }) => {
     <>
       {isVisible && (
         <div
-          className={`fixed bottom-4 right-4 z-50 w-[420px] max-w-sm transition-all duration-500 ease-out ${
-            isVisibleWithAnimation
-              ? "opacity-100 translate-y-0"
-              : "opacity-0 translate-y-10"
-          }`}
+          style={{
+            position: "fixed",
+            bottom: "1rem",
+            right: "1rem",
+            zIndex: 50,
+            width: "90vw",
+            maxWidth: "320px",
+            transition: "all 500ms ease-out",
+            opacity: isVisibleWithAnimation ? 1 : 0,
+            transform: isVisibleWithAnimation ? "translateY(0)" : "translateY(2.5rem)",
+          }}
         >
-         <div className="fixed bottom-2 right-2 w-[75%] sm:w-full sm:max-w-lg sm:bottom-0 sm:right-1 z-50">
-            <div className="rounded-xl shadow-lg bg-white overflow-hidden">
-              <div className="relative mb-6 px-4 pt-4">
-                <div className="absolute inset-x-0 top-0 h-12 bg-blue-600 rounded-t-xl" />
-                <button
-                  onClick={handleClose}
-                  className="absolute top-2 right-3 text-white text-xl font-bold z-20"
-                >
-                  &times;
-                </button>
-                <h2 className="relative text-2xl font-bold text-white text-center z-10">
-                  Enter Vehicle Details
-                </h2>
-              </div>
+          <div
+            style={{
+              borderRadius: "0.75rem",
+              boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
+              backgroundColor: "white",
+              overflow: "hidden",
+            }}
+          >
+            <div
+              style={{
+                position: "relative",
+                backgroundColor: "#2563eb",
+                padding: "clamp(0.5rem, 2vw, 1rem)",
+                borderTopLeftRadius: "0.75rem",
+                borderTopRightRadius: "0.75rem",
+              }}
+            >
+              <h2
+                style={{
+                  fontSize: "clamp(1rem, 4vw, 1.25rem)",
+                  fontWeight: "bold",
+                  color: "white",
+                  textAlign: "center",
+                }}
+              >
+                Enter Vehicle Details
+              </h2>
+              <button
+                onClick={handleClose}
+                style={{
+                  position: "absolute",
+                  top: "0.5rem",
+                  right: "0.5rem",
+                  color: "white",
+                  fontSize: "clamp(0.75rem, 3vw, 1rem)",
+                  fontWeight: "bold",
+                  backgroundColor: "#e5e7eb",
+                  borderRadius: "0.25rem",
+                  padding: "0.1rem 0.3rem",
+                  border: "none",
+                  cursor: "pointer",
+                }}
+              >
+                ×
+              </button>
+            </div>
 
-              <div className="flex flex-col gap-4 px-4 pb-6">
-                <input
-                  className="border border-gray-300 rounded px-4 py-2 text-sm shadow-md focus:ring-2 focus:ring-blue-600"
-                  placeholder="Build Year"
-                  value={buildYear}
-                  onChange={(e) => setBuildYear(e.target.value)}
-                />
-                <input
-                  className="border border-gray-300 rounded px-4 py-2 text-sm shadow-md focus:ring-2 focus:ring-blue-600"
-                  placeholder="Make"
-                  value={make}
-                  onChange={(e) => setMake(e.target.value)}
-                />
-                <input
-                  className="border border-gray-300 rounded px-4 py-2 text-sm shadow-md focus:ring-2 focus:ring-blue-600"
-                  placeholder="Model"
-                  value={model}
-                  onChange={(e) => setModel(e.target.value)}
-                />
-                <input
-                  className="border border-gray-300 rounded px-4 py-2 text-sm shadow-md focus:ring-2 focus:ring-blue-600"
-                  placeholder="Odometer (in KM)"
-                  value={odometer}
-                  onChange={(e) => setOdometer(e.target.value)}
-                />
-                <input
-                  className="border border-gray-300 rounded px-4 py-2 text-sm shadow-md focus:ring-2 focus:ring-blue-600"
-                  placeholder="Specification (optional)"
-                  value={specification}
-                  onChange={(e) => setSpecification(e.target.value)}
-                />
-                <button
-                  onClick={handleSubmit}
-                  disabled={loading}
-                  className={`bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm mt-2 ${
-                    loading ? "opacity-50 cursor-not-allowed" : ""
-                  }`}
-                >
-                  {loading ? "Fetching..." : "Get Price"}
-                </button>
-              </div>
+            <div
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "clamp(0.5rem, 2vw, 0.75rem)",
+                padding: "clamp(0.5rem, 2vw, 1rem)",
+              }}
+            >
+              <input
+                style={{
+                  border: "1px solid #d1d5db",
+                  borderRadius: "0.25rem",
+                  padding: "clamp(0.25rem, 1.5vw, 0.5rem) clamp(0.25rem, 1.5vw, 0.75rem)",
+                  fontSize: "clamp(0.75rem, 3vw, 0.875rem)",
+                  outline: "none",
+                  width: "100%",
+                  boxSizing: "border-box",
+                }}
+                placeholder="Build Year"
+                value={buildYear}
+                onChange={(e) => setBuildYear(e.target.value)}
+                onFocus={(e) => (e.target.style.boxShadow = "0 0 0 2px #2563eb")}
+                onBlur={(e) => (e.target.style.boxShadow = "none")}
+              />
+              <input
+                style={{
+                  border: "1px solid #d1d5db",
+                  borderRadius: "0.25rem",
+                  padding: "clamp(0.25rem, 1.5vw, 0.5rem) clamp(0.25rem, 1.5vw, 0.75rem)",
+                  fontSize: "clamp(0.75rem, 3vw, 0.875rem)",
+                  outline: "none",
+                  width: "100%",
+                  boxSizing: "border-box",
+                }}
+                placeholder="Make"
+                value={make}
+                onChange={(e) => setMake(e.target.value)}
+                onFocus={(e) => (e.target.style.boxShadow = "0 0 0 2px #2563eb")}
+                onBlur={(e) => (e.target.style.boxShadow = "none")}
+              />
+              <input
+                style={{
+                  border: "1px solid #d1d5db",
+                  borderRadius: "0.25rem",
+                  padding: "clamp(0.25rem, 1.5vw, 0.5rem) clamp(0.25rem, 1.5vw, 0.75rem)",
+                  fontSize: "clamp(0.75rem, 3vw, 0.875rem)",
+                  outline: "none",
+                  width: "100%",
+                  boxSizing: "border-box",
+                }}
+                placeholder="Model"
+                value={model}
+                onChange={(e) => setModel(e.target.value)}
+                onFocus={(e) => (e.target.style.boxShadow = "0 0 0 2px #2563eb")}
+                onBlur={(e) => (e.target.style.boxShadow = "none")}
+              />
+              <input
+                style={{
+                  border: "1px solid #d1d5db",
+                  borderRadius: "0.25rem",
+                  padding: "clamp(0.25rem, 1.5vw, 0.5rem) clamp(0.25rem, 1.5vw, 0.75rem)",
+                  fontSize: "clamp(0.75rem, 3vw, 0.875rem)",
+                  outline: "none",
+                  width: "100%",
+                  boxSizing: "border-box",
+                }}
+                placeholder="Odometer (in KM)"
+                value={odometer}
+                onChange={(e) => setOdometer(e.target.value)}
+                onFocus={(e) => (e.target.style.boxShadow = "0 0 0 2px #2563eb")}
+                onBlur={(e) => (e.target.style.boxShadow = "none")}
+              />
+              <input
+                style={{
+                  border: "1px solid #d1d5db",
+                  borderRadius: "0.25rem",
+                  padding: "clamp(0.25rem, 1.5vw, 0.5rem) clamp(0.25rem, 1.5vw, 0.75rem)",
+                  fontSize: "clamp(0.75rem, 3vw, 0.875rem)",
+                  outline: "none",
+                  width: "100%",
+                  boxSizing: "border-box",
+                }}
+                placeholder="Specification (optional)"
+                value={specification}
+                onChange={(e) => setSpecification(e.target.value)}
+                onFocus={(e) => (e.target.style.boxShadow = "0 0 0 2px #2563eb")}
+                onBlur={(e) => (e.target.style.boxShadow = "none")}
+              />
+              <button
+                onClick={handleSubmit}
+                disabled={loading}
+                style={{
+                  backgroundColor: loading ? "#93c5fd" : "#2563eb",
+                  color: "white",
+                  padding: "clamp(0.25rem, 1.5vw, 0.5rem)",
+                  borderRadius: "0.25rem",
+                  fontSize: "clamp(0.75rem, 3vw, 0.875rem)",
+                  border: "none",
+                  cursor: loading ? "not-allowed" : "pointer",
+                  transition: "background-color 150ms ease",
+                  width: "100%",
+                  boxSizing: "border-box",
+                }}
+                onMouseEnter={(e) => !loading && (e.target.style.backgroundColor = "#1d4ed8")}
+                onMouseLeave={(e) => !loading && (e.target.style.backgroundColor = "#2563eb")}
+              >
+                {loading ? "Fetching..." : "Get Price"}
+              </button>
             </div>
           </div>
         </div>
@@ -149,8 +254,12 @@ const VehiclePriceModal = ({ isVisible, onClose }) => {
 
       <VehiclePriceResultModal
         isVisible={showResult}
-        onClose={() => setShowResult(false)}
+        onClose={() => {
+          setShowResult(false);
+          setIsIconVisible(true); // Show icon when VehiclePriceResultModal closes
+        }}
         vehicleDetails={vehicleDetails}
+        setIsIconVisible={setIsIconVisible}
       />
     </>
   );
