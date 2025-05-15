@@ -7,7 +7,13 @@ const PriceMyRide = () => {
   const [isIconVisible, setIsIconVisible] = useState(true);
 
   return (
-    <>
+    <section
+  style={{
+    position: "relative",
+    width: "100%",
+    overflow: "hidden",
+  }}
+>
       {isIconVisible && (
         <div
           style={{
@@ -84,12 +90,13 @@ const PriceMyRide = () => {
           </div>
         </div>
       )}
+
       <VehiclePriceModal
         isVisible={isModalVisible}
         onClose={() => setIsModalVisible(false)}
         setIsIconVisible={setIsIconVisible}
       />
-    </>
+    </section>
   );
 };
 
