@@ -296,12 +296,14 @@ const SellVehicleModal = ({ isVisible, onClose }) => {
       centered
       maskClosable
       width="90vw"
-      style={{ maxWidth: "320px", margin: "0 auto", padding: "0 clamp(0.5rem, 2vw, 1rem)", zIndex: 10000 }} // Updated to high z-index
+      zIndex={100000} // Set high z-index for modal and backdrop
+      style={{ maxWidth: "320px", margin: "0 auto", padding: "0 clamp(0.5rem, 2vw, 1rem)", zIndex: 100000 }} // Reinforced high z-index
       bodyStyle={{
         padding: "clamp(1rem, 3vw, 1.25rem)",
         borderRadius: "0.75rem",
         backgroundColor: "#fff",
       }}
+      maskStyle={{ zIndex: 100000 }} // Ensure backdrop has high z-index
     >
       <h2
         style={{
