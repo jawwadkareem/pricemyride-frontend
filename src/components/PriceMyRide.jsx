@@ -126,7 +126,7 @@ const PriceMyRide = () => {
             bottom: "1rem",
             right: "1rem",
             cursor: "pointer",
-            zIndex: 9999, // Updated to high z-index
+        
             transition: "opacity 0.3s ease",
             opacity: isIconVisible ? 1 : 0,
             pointerEvents: isIconVisible ? "auto" : "none",
