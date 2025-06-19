@@ -1,3 +1,4 @@
+
 // import React, { useState } from "react";
 // import VehiclePriceModal from "./VehiclePriceModal";
 // import image from "../../public/calculator-icon.png";
@@ -8,12 +9,12 @@
 
 //   return (
 //     <section
-//   style={{
-//     position: "relative",
-//     width: "100%",
-//     overflow: "hidden",
-//   }}
-// >
+//       style={{
+//         position: "relative",
+//         width: "100%",
+//         overflow: "hidden",
+//       }}
+//     >
 //       {isIconVisible && (
 //         <div
 //           style={{
@@ -21,7 +22,7 @@
 //             bottom: "1rem",
 //             right: "1rem",
 //             cursor: "pointer",
-//             zIndex: 1000,
+        
 //             transition: "opacity 0.3s ease",
 //             opacity: isIconVisible ? 1 : 0,
 //             pointerEvents: isIconVisible ? "auto" : "none",
@@ -101,15 +102,44 @@
 // };
 
 // export default PriceMyRide;
-
-
 import React, { useState } from "react";
 import VehiclePriceModal from "./VehiclePriceModal";
 import image from "../../public/calculator-icon.png";
+import axios from "axios";
 
 const PriceMyRide = () => {
+  const widgetId = "pricemyride"; 
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [isIconVisible, setIsIconVisible] = useState(true);
+
+  const handleOpenChat = async () => {
+    setIsModalVisible(true);
+    setIsIconVisible(false);
+    window.parent.postMessage(
+      {
+        event: 'iframeButtonClick',
+      },
+      '*'
+    );
+    let userIP = '';
+    try {
+      const ipRes = await axios.get('https://api64.ipify.org?format=json');
+      userIP = ipRes.data.ip;
+      console.log(userIP);
+    } catch (e) {
+      console.error('IP fetch failed', e);
+    }
+    try {
+      await axios.post(`http://localhost:3000/track-visitor`, {
+        event: "chat_opened",
+        timestamp: new Date().toISOString(),
+        widgetId,
+        ip: userIP,
+      });
+    } catch (error) {
+      console.error("Failed to track visitor:", error);
+    }
+  };
 
   return (
     <section
@@ -126,7 +156,6 @@ const PriceMyRide = () => {
             bottom: "1rem",
             right: "1rem",
             cursor: "pointer",
-        
             transition: "opacity 0.3s ease",
             opacity: isIconVisible ? 1 : 0,
             pointerEvents: isIconVisible ? "auto" : "none",
@@ -156,10 +185,7 @@ const PriceMyRide = () => {
               e.currentTarget.children[0].style.opacity = "1";
               e.currentTarget.children[1].style.opacity = "0";
             }}
-            onClick={() => {
-              setIsModalVisible(true);
-              setIsIconVisible(false);
-            }}
+            onClick={handleOpenChat}
           >
             <img
               src={image}
@@ -198,7 +224,10 @@ const PriceMyRide = () => {
 
       <VehiclePriceModal
         isVisible={isModalVisible}
-        onClose={() => setIsModalVisible(false)}
+        onClose={() => {
+          setIsModalVisible(false);
+          setIsIconVisible(true);
+        }}
         setIsIconVisible={setIsIconVisible}
       />
     </section>
